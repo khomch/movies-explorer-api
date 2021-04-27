@@ -1,6 +1,5 @@
 module.exports = {
   env: {
-    browser: true,
     commonjs: true,
     es2021: true,
     node: true,
@@ -15,6 +14,20 @@ module.exports = {
     ecmaVersion: 12,
   },
   rules: {
-    'no-underscore-dangle': 0,
+    'no-underscore-dangle': [
+      'error',
+      {
+        allow: [
+          '_id',
+          '_fetchOptions',
+          '_cardEndpoint',
+          '_cardLikeEndpoint',
+          '_goREST',
+          '_authOptions',
+        ],
+        enforceInMethodNames: true,
+        allowAfterThis: true,
+      },
+    ],
   },
 };

@@ -31,11 +31,13 @@ const createUser = (req, res, next) => {
       message: 'Пользователь создан',
     }))
     .catch((err) => {
-      if (err.code === MONGO_DUBLICATE_ERROR) {
+      if (err.name === 'MongoError' && err.code === MONGO_DUBLICATE_ERROR) {
         throw new DuplicateError('Такой пользователь уже существует');
       }
       if (err.name === 'ValidationError') {
         throw new BadRequest('Ошибка валидации');
+      } else {
+        throw new BadRequest('Невозможно зарегистрировать пользователя');
       }
     })
     .catch(next);
@@ -57,7 +59,7 @@ const login = (req, res, next) => {
     }).select('+password')
     .then((user) => {
       if (!user) {
-        throw new BadRequest('Неверный емейл или пароль');
+        throw new NoTokenError('Неверный емейл или пароль');
       }
 
       return bcrypt.compare(password, user.password)

@@ -5,7 +5,9 @@ const BadRequest = require('../errors/bad-request.js');
 const DuplicateError = require('../errors/duplicate-err.js');
 
 const getMovies = (req, res, next) => {
-  Movie.find({})
+  Movie.find({
+    owner: req.user._id,
+  }, '-owner')
     .then((movies) => {
       if (!movies) {
         throw new NotFoundError('Фильмы не найдены');
@@ -21,6 +23,7 @@ const createMovie = (req, res, next) => {
     country,
     director,
     duration,
+    year,
     description,
     image,
     trailer,
@@ -29,23 +32,36 @@ const createMovie = (req, res, next) => {
     nameRU,
     nameEN,
   } = req.body; // получим из объекта запроса имя и ссылку на карточку
-  Movie.create({
-    country,
-    director,
-    duration,
-    description,
-    image,
-    trailer,
-    thumbnail,
-    owner: req.user._id,
-    movieId,
-    nameRU,
-    nameEN,
-  })
-    .then((movie) => res.status(200).send(movie))
-    .catch((err) => {
-      if (err.name === 'ValidationError') {
-        throw new BadRequest('Ошибка валидации');
+  Movie.findOne({ movieId })
+    .then((movie) => {
+      if (movie) {
+        throw new DuplicateError('Фильм с таким ID уже сохранен');
+      } if (!movie) {
+        Movie.create({
+          country,
+          director,
+          duration,
+          year,
+          description,
+          image,
+          trailer,
+          thumbnail,
+          owner: req.user._id,
+          movieId,
+          nameRU,
+          nameEN,
+        })
+          .then((movieCreated) => res.status(200).send(movieCreated))
+          .catch((err) => {
+            if (err.name === 'ValidationError') {
+              throw new BadRequest('Ошибка валидации');
+            } else {
+              throw new BadRequest('Ошибка при добавлении фильма');
+            }
+          })
+          .catch(next);
+      } else {
+        throw new BadRequest('Ошибка при добавлении фильма');
       }
     })
     .catch(next);

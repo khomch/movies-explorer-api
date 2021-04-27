@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 
 const NoTokenError = require('../errors/no-token-err');
 
-const { NODE_ENV, JWT_SECRET_KEY } = process.env;
+const { NODE_ENV, JWT_SECRET_KEY } = require('../movies.config.js');
 
 const generateSign = (payload) => jwt.sign(payload, NODE_ENV === 'production' ? JWT_SECRET_KEY : 'dev-secret', { expiresIn: '7d' });
 
@@ -30,5 +30,4 @@ function auth(req, res, next) {
 module.exports = {
   auth,
   generateSign,
-  // isAuthorized
 };

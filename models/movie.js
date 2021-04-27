@@ -17,6 +17,11 @@ const movieSchema = new mongoose.Schema({
     required: true,
     minlength: 1,
   },
+  year: {
+    type: String,
+    required: true,
+    minlength: 1,
+  },
   description: {
     type: String,
     required: true,
@@ -38,12 +43,12 @@ const movieSchema = new mongoose.Schema({
     minlength: 1,
   },
   owner: {
-    type: String,
+    type: mongoose.Types.ObjectId,
     required: true,
     minlength: 1,
   },
   movieId: {
-    type: String,
+    type: Number,
     required: true,
     minlength: 1,
   },

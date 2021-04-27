@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const getError = require('../controllers/error');
+const { getError } = require('../controllers/errors');
 
 router.all('*', getError);
 
