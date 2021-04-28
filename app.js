@@ -5,12 +5,8 @@ const express = require('express'); // импортируем экспресс
 const bodyParser = require('body-parser'); // подключаем мидлвар для парсинга JSON в body
 const mongoose = require('mongoose'); // подключаем mongoose
 const { requestLogger, errorLogger } = require('./middlewares/logger');
-const usersRouter = require('./routes/users.js'); // пользовательский роутер
-const authRouter = require('./routes/auth.js');
-const errorRouter = require('./routes/error.js');
-const moviesRouter = require('./routes/movies.js');
-const { auth } = require('./middlewares/auth.js');
 const { errorsHandler } = require('./controllers/errors.js');
+const router = require('./routes/index.js');
 
 const { PORT, DB } = require('./movies.config.js');
 
@@ -36,10 +32,7 @@ app.use(bodyParser.json());
 
 app.use(requestLogger); // подключаем логгер запросов
 
-app.use('/', authRouter);
-app.use('/users', auth, usersRouter);
-app.use('/movies', auth, moviesRouter);
-app.use('/', errorRouter);
+app.use('/', router);
 
 app.use(errorLogger); // подключаем логгер ошибок
 

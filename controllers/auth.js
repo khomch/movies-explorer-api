@@ -37,7 +37,7 @@ const createUser = (req, res, next) => {
       if (err.name === 'ValidationError') {
         throw new BadRequest('Ошибка валидации');
       } else {
-        throw new BadRequest('Невозможно зарегистрировать пользователя');
+        next(err);
       }
     })
     .catch(next);

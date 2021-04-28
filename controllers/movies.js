@@ -3,6 +3,7 @@ const Movie = require('../models/movie.js');
 const NotFoundError = require('../errors/not-found-err.js');
 const BadRequest = require('../errors/bad-request.js');
 const DuplicateError = require('../errors/duplicate-err.js');
+const NoPermissionError = require('../errors/no-permission-err.js');
 
 const getMovies = (req, res, next) => {
   Movie.find({
@@ -51,15 +52,32 @@ const createMovie = (req, res, next) => {
           nameRU,
           nameEN,
         })
-          .then((movieCreated) => res.status(200).send(movieCreated))
+          .then((movieCreated) => {
+            const {
+              _id,
+            } = movieCreated;
+            res.status(200).send({
+              _id,
+              country,
+              director,
+              duration,
+              year,
+              description,
+              image,
+              trailer,
+              thumbnail,
+              movieId,
+              nameRU,
+              nameEN,
+            });
+          })
           .catch((err) => {
             if (err.name === 'ValidationError') {
               throw new BadRequest('Ошибка валидации');
             } else {
-              throw new BadRequest('Ошибка при добавлении фильма');
+              next(err);
             }
-          })
-          .catch(next);
+          });
       } else {
         throw new BadRequest('Ошибка при добавлении фильма');
       }
@@ -68,7 +86,8 @@ const createMovie = (req, res, next) => {
 };
 
 const deleteMovie = (req, res, next) => {
-  if (req.params.movieId.length !== 24) {
+  const regex = /^[0-9A-Fa-f]{24}$/;
+  if (!regex.test(req.params.movieId)) {
     throw new BadRequest('Невалидный id фильма');
   } else {
     Movie.findById(req.params.movieId)
@@ -76,13 +95,42 @@ const deleteMovie = (req, res, next) => {
         if (!movie) {
           throw new NotFoundError('Нет такого фильма');
         } else if (`${movie.owner}` !== req.user._id) {
-          throw new DuplicateError('Нельзя удалять чужие фильмы');
+          throw new NoPermissionError('Нельзя удалять чужие фильмы');
         } else {
           Movie.findByIdAndRemove(req.params.movieId)
             .then((movieDeleted) => {
+              const {
+                _id,
+                country,
+                director,
+                duration,
+                year,
+                description,
+                image,
+                trailer,
+                thumbnail,
+                movieId,
+                nameRU,
+                nameEN,
+              } = movieDeleted;
               if (!movieDeleted) {
                 throw new NotFoundError('Нет фильма с таким id');
-              } else return res.status(200).send(movieDeleted);
+              } else {
+                return res.status(200).send({
+                  _id,
+                  country,
+                  director,
+                  duration,
+                  year,
+                  description,
+                  image,
+                  trailer,
+                  thumbnail,
+                  movieId,
+                  nameRU,
+                  nameEN,
+                });
+              }
             });
         }
       })

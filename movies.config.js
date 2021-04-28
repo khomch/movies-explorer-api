@@ -1,13 +1,13 @@
-const { NODE_ENV, JWT_SECRET_KEY } = process.env;
+const { NODE_ENV, JWT_SECRET_KEY, DATABASE } = process.env;
 
 let PORT = '';
 let DB = '';
 
 if (NODE_ENV === 'production') {
   PORT = 3000;
-  DB = 'bitfilmsdb';
+  DB = DATABASE;
 } else {
-  PORT = 5000;
+  PORT = 3000;
   DB = 'bitfilmsdb-devdb';
 }
 
