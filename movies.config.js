@@ -12,5 +12,5 @@ if (NODE_ENV === 'production') {
 }
 
 module.exports = {
-  NODE_ENV, PORT, DB, JWT_SECRET_KEY
+  NODE_ENV, PORT, DB, JWT_SECRET_KEY,
 };

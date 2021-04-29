@@ -53,22 +53,19 @@ const createMovie = (req, res, next) => {
           nameEN,
         })
           .then((movieCreated) => {
-            const {
-              _id,
-            } = movieCreated;
             res.status(200).send({
-              _id,
-              country,
-              director,
-              duration,
-              year,
-              description,
-              image,
-              trailer,
-              thumbnail,
-              movieId,
-              nameRU,
-              nameEN,
+              _id: movieCreated._id,
+              country: movieCreated.country,
+              director: movieCreated.director,
+              duration: movieCreated.duration,
+              year: movieCreated.year,
+              description: movieCreated.description,
+              image: movieCreated.image,
+              trailer: movieCreated.trailer,
+              thumbnail: movieCreated.thumbnail,
+              movieId: movieCreated.movieId,
+              nameRU: movieCreated.nameRU,
+              nameEN: movieCreated.nameEN,
             });
           })
           .catch((err) => {
