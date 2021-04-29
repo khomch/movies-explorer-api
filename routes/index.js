@@ -2,6 +2,7 @@ const router = require('express').Router();
 const { celebrate, Joi } = require('celebrate');
 const { auth } = require('../middlewares/auth.js');
 const { getError } = require('../controllers/errors');
+
 const {
   createUser,
   login,
@@ -49,7 +50,15 @@ router.post('/movies', celebrate({
   }),
 }), auth, createMovie);
 
-router.delete('/movies/:movieId', auth, deleteMovie);
+router.delete('/movies/:id', celebrate({
+  params: Joi.object().keys({
+    id: Joi
+      .string()
+      .required()
+      .hex()
+      .length(24),
+  }),
+}), auth, deleteMovie);
 
 router.get('/users/me', auth, getUserProfile);
 

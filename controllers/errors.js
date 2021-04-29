@@ -5,7 +5,14 @@ const getError = () => {
 };
 
 const errorsHandler = (err, req, res, next) => {
-  if (err.details !== undefined) {
+  if (err.details !== undefined && err.details.get('params') !== undefined) {
+    const errorBody = err.details.get('params'); // 'details' is a Map()
+    const { details: [errorDetails] } = errorBody;
+    return res.status(400).send({
+      message: errorDetails.message,
+    });
+  }
+  if (err.details !== undefined && err.details.get('body') !== undefined) {
     const errorBody = err.details.get('body'); // 'details' is a Map()
     const { details: [errorDetails] } = errorBody;
     return res.status(400).send({

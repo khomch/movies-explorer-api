@@ -84,17 +84,17 @@ const createMovie = (req, res, next) => {
 
 const deleteMovie = (req, res, next) => {
   const regex = /^[0-9A-Fa-f]{24}$/;
-  if (!regex.test(req.params.movieId)) {
+  if (!regex.test(req.params.id)) {
     throw new BadRequest('Невалидный id фильма');
   } else {
-    Movie.findById(req.params.movieId)
+    Movie.findById(req.params.id)
       .then((movie) => {
         if (!movie) {
           throw new NotFoundError('Нет такого фильма');
         } else if (`${movie.owner}` !== req.user._id) {
           throw new NoPermissionError('Нельзя удалять чужие фильмы');
         } else {
-          Movie.findByIdAndRemove(req.params.movieId)
+          Movie.findByIdAndRemove(req.params.id)
             .then((movieDeleted) => {
               const {
                 _id,
