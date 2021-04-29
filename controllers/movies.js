@@ -33,11 +33,11 @@ const createMovie = (req, res, next) => {
     nameRU,
     nameEN,
   } = req.body; // получим из объекта запроса имя и ссылку на карточку
-  Movie.findOne({ movieId })
+  Movie.findOne({ movieId, owner: req.user._id })
     .then((movie) => {
       if (movie) {
         throw new DuplicateError('Фильм с таким ID уже сохранен');
-      } if (!movie) {
+      } else {
         Movie.create({
           country,
           director,
@@ -75,8 +75,6 @@ const createMovie = (req, res, next) => {
               next(err);
             }
           });
-      } else {
-        throw new BadRequest('Ошибка при добавлении фильма');
       }
     })
     .catch(next);
