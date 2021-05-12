@@ -4,7 +4,7 @@ let PORT = '';
 let DB = '';
 
 if (NODE_ENV === 'production') {
-  PORT = 3000;
+  PORT = 5000;
   DB = DATABASE;
 } else {
   PORT = 3000;
