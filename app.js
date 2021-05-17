@@ -15,6 +15,7 @@ const app = express(); // добавляем экспресс в приложе�
 const options = {
   origin: [
     `http://localhost:${PORT}`,
+    'https://kino-explorer.nomoredomains.icu'
   ],
   credentials: true, // эта опция позволяет устанавливать куки
 };
