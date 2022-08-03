@@ -1,6 +1,13 @@
-# movies-explorer-api
+# **Сервис для поиска короткометражек: API на Express.js**
+Фронтенд приложения `Movies-explorer`: поиск по базе короткометражек, возможность поставить лайк (сохранить и избранное) и удалить его, регистрация пользователей, личный кабинет с избранными фильмами. 
 
-Ссылки: 
-[https://kino-explorer.nomoredomains.icu/](https://kino-explorer.nomoredomains.icu/) 
-[https://api.kino-explorer.nomoredomains.icu](https://api.kino-explorer.nomoredomains.icu/)
-[130.193.43.250](130.193.43.250)
+## Технологии
+1. React
+2. Express.js
+3. Сelebrate
+
+## Версия
+1.0
+
+## Автор
+Anton Khomchenko
