@@ -1,7 +1,7 @@
 # **Сервис для поиска короткометражек: API на Express.js**
 Бэкенд приложения `Movies-explorer`: сохранение/удаление фильмов в/из профиля, регистрация и авторизация пользователей. 
 
-![Проект Movies-explorer-api](https://github.com/khomch/movies-explorer-api/blob/main/readme/movies-explorer-saved-films.jpg?raw=true)
+![Проект Movies-explorer-api](https://github.com/khomch/movies-explorer-api/blob/main/readme/movies-explorer-saved-films.png?raw=true)
 
 ## Технологии
 1. React
