@@ -7,7 +7,7 @@ if (NODE_ENV === 'production') {
   PORT = 3000;
   DB = DATABASE;
 } else {
-  PORT = 3000;
+  PORT = 3005;
   DB = 'bitfilmsdb-devdb';
 }
 
