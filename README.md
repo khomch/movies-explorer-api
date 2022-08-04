@@ -1,10 +1,38 @@
 # **Сервис для поиска короткометражек: API на Express.js**
 Бэкенд приложения `Movies-explorer`: сохранение/удаление фильмов в/из профиля, регистрация и авторизация пользователей. 
 
+![Проект Movies-explorer-api](https://github.com/khomch/react-mesto-api-full/blob/main/readme/mesto-index.jpg?raw=true)
+
 ## Технологии
 1. React
 2. Express.js
 3. Сelebrate
+
+## Инструкция по развёртыванию и используемые версии пакетов
+
+### Backend
+1. Установить MongoDB
+2. Установить все необходимые пакеты с помощью npm `npm install`
+3. Запустить проект в окружении разработки командой `npm run dev`
+4. Сборка проекта осуществляется с помощью `npm run start`
+
+#### Используемые версии пакетов
+* Bcrypt: 5.0.1
+* Body-parser: 1.19.0
+* Celebrate: 14.0.0
+* Cors: 2.8.5
+* Dotenv: 8.2.0
+* Express: 4.17.1
+* Express-winston: 4.1.0
+* Joy: 0.1.1
+* Jsonwebtoken: 8.5.1
+* Mongoose: 5.11.18
+* Validator: 13.5.2
+* Winston: 3.3.3
+* Eslint: 7.19.0
+* Nodemon: 2.0.7
+* Eslint-config-airbnb-base: 14.2.1
+* Eslint-plugin-import: 2.22.1
 
 ## Версия
 1.0
