@@ -1,22 +1,22 @@
-# **Сервис для поиска короткометражек: API на Express.js**
-Бэкенд приложения `Movies-explorer`: сохранение/удаление фильмов в/из профиля, регистрация и авторизация пользователей. 
+# **Service for search of short movies: API on Express.js**
+Backend of `Movies-explorer`: save/delete movies to/from provile, user registration and authorization. 
 
 ![Проект Movies-explorer-api](https://github.com/khomch/movies-explorer-api/blob/main/readme/movies-explorer-saved-films.png?raw=true)
 
-## Технологии
+## Technologies
 1. React
 2. Express.js
 3. Сelebrate
 
-## Инструкция по развёртыванию и используемые версии пакетов
+## How to install
 
 ### Backend
-1. Установить MongoDB
-2. Установить все необходимые пакеты с помощью npm `npm install`
-3. Запустить проект в окружении разработки командой `npm run dev`
-4. Сборка проекта осуществляется с помощью `npm run start`
+1. Install MongoDB
+2. Install packages with npm `npm install`
+3. Start dev environment with `npm run dev`
+4. Build with `npm run start`
 
-#### Используемые версии пакетов
+#### Packages
 * Bcrypt: 5.0.1
 * Body-parser: 1.19.0
 * Celebrate: 14.0.0
@@ -34,9 +34,9 @@
 * Eslint-config-airbnb-base: 14.2.1
 * Eslint-plugin-import: 2.22.1
 
-## Версия
+## Version
 1.0
 
-## Автор
+## Author
 Anton Khomchenko
 
