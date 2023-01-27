@@ -7,6 +7,7 @@ Backend of `Movies-explorer`: save/delete movies to/from provile, user registrat
 1. React
 2. Express.js
 3. Сelebrate
+4. MongoDB
 
 ## How to install
 
